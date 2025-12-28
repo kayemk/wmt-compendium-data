@@ -17,5 +17,6 @@ See: [CONTRIBUTING.md](CONTRIBUTING.md)
 - Units: `data/units/*.yml`
 
 ## License
+Code: MIT (see LICENSE) / Data: CC BY 4.0 (see LICENSE-DATA)
 Code & schema tooling: MIT  
 Data: CC BY 4.0 (recommended)
