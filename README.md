@@ -12,6 +12,8 @@ Please contribute via the Admin UI (GitHub login). This creates a Pull Request f
 
 See: [CONTRIBUTING.md](CONTRIBUTING.md)
 
+Maintainers: [MAINTAINERS.md](MAINTAINERS.md)
+
 ## Data format
 - Warbands: `data/warbands/*.yml`
 - Units: `data/units/*.yml`
