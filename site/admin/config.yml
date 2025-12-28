@@ -4,6 +4,7 @@ backend:
   branch: main
   open_authoring: true
   base_url: https://wmt-cms-auth.plain-flower-9acd.workers.dev
+  auth_endpoint: auth
 
 publish_mode: editorial_workflow
 
