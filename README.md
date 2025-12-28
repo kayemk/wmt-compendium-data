@@ -7,3 +7,4 @@ Community-maintained YAML data + schema validation + generated static JSON "API"
 - Contribute: /admin/ (Decap CMS -> PRs via Open Authoring)
 
 Fan-made project. Please don't upload PDFs or large verbatim rule text.
+
