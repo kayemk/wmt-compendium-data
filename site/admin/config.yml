@@ -1,0 +1,52 @@
+backend:
+  name: github
+  repo: kayemk/wmt-compendium-data
+  branch: main
+  open_authoring: true
+  base_url: https://REPLACE-ME.workers.dev
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "warbands"
+    label: "Warbands"
+    folder: "data/warbands"
+    create: true
+    extension: "yml"
+    format: "yml"
+    slug: "{{id}}"
+    fields:
+      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Name", name: "name", widget: "string" }
+      - { label: "Game", name: "game", widget: "string", default: "Warhammer More Time" }
+      - label: "Source"
+        name: "source"
+        widget: "object"
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Page", name: "page", widget: "number", value_type: "int", required: false }
+      - { label: "Summary", name: "summary", widget: "text", required: false }
+      - { label: "Unit IDs", name: "unit_ids", widget: "list" }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+
+  - name: "units"
+    label: "Units"
+    folder: "data/units"
+    create: true
+    extension: "yml"
+    format: "yml"
+    slug: "{{id}}"
+    fields:
+      - { label: "ID", name: "id", widget: "string" }
+      - { label: "Name", name: "name", widget: "string" }
+      - label: "Type"
+        name: "type"
+        widget: "select"
+        options: ["hero", "henchman", "hired_sword", "other"]
+      - { label: "Warband IDs", name: "warband_ids", widget: "list" }
+      - label: "Cost"
+        name: "cost"
+        widget: "object"
+        fields:
+          - { label: "Gold", name: "gold", widget: "number", value_type: "int" }
+          - { label: "Upkeep", name: "upkeep", widget: "number", value_type: "int", required: false }

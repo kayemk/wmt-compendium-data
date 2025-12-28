@@ -1,0 +1,12 @@
+id: reikland
+name: Reikland Mercenaries
+game: Warhammer More Time
+source:
+  name: "Rulebook X"
+  page: 12
+summary: "Balanced human warband with strong leadership."
+unit_ids:
+  - swordsman
+tags:
+  - human
+  - mercenary

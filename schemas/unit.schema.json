@@ -1,0 +1,39 @@
+{
+  "type": "object",
+  "required": ["id", "name", "type", "warband_ids", "cost", "profile"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^[a-z0-9\\-]+$" },
+    "name": { "type": "string" },
+    "type": { "type": "string", "enum": ["hero", "henchman", "hired_sword", "other"] },
+    "warband_ids": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
+    "cost": {
+      "type": "object",
+      "required": ["gold"],
+      "properties": {
+        "gold": { "type": "integer", "minimum": 0 },
+        "upkeep": { "type": "integer", "minimum": 0 }
+      },
+      "additionalProperties": false
+    },
+    "profile": {
+      "type": "object",
+      "required": ["M","WS","BS","S","T","W","I","A","Ld"],
+      "properties": {
+        "M":  { "type": "integer" },
+        "WS": { "type": "integer" },
+        "BS": { "type": "integer" },
+        "S":  { "type": "integer" },
+        "T":  { "type": "integer" },
+        "W":  { "type": "integer" },
+        "I":  { "type": "integer" },
+        "A":  { "type": "integer" },
+        "Ld": { "type": "integer" },
+        "Sv": { "type": ["integer","null"] }
+      },
+      "additionalProperties": false
+    },
+    "equipment": { "type": "object" },
+    "keywords": { "type": "array", "items": { "type": "string" } }
+  },
+  "additionalProperties": false
+}
