@@ -1,63 +1,115 @@
-from pathlib import Path
+#!/usr/bin/env python3
+from __future__ import annotations
+
 import json
+import re
+import sys
+from pathlib import Path
+
 import yaml
-from jsonschema import validate
+from jsonschema import Draft202012Validator
 
 ROOT = Path(__file__).resolve().parents[1]
 DATA = ROOT / "data"
 SCHEMAS = ROOT / "schemas"
 
-def load_schema(name: str) -> dict:
-    return json.loads((SCHEMAS / name).read_text(encoding="utf-8"))
+ID_RE = re.compile(r"^[a-z0-9-]+$")
 
-WAR_BAND_SCHEMA = load_schema("warband.schema.json")
-UNIT_SCHEMA = load_schema("unit.schema.json")
 
-def load_yaml_files(folder: Path) -> list[dict]:
-    items = []
-    for p in sorted(folder.glob("*.yml")):
-        obj = yaml.safe_load(p.read_text(encoding="utf-8"))
-        if not isinstance(obj, dict):
-            raise ValueError(f"{p} must contain a YAML mapping/object")
-        obj["_file"] = str(p.relative_to(ROOT))
-        items.append(obj)
+def read_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def read_yaml_file(path: Path) -> dict:
+    data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    if not isinstance(data, dict):
+        raise ValueError(f"{path}: YAML root must be a mapping/object.")
+    return data
+
+
+def load_dir(folder: Path) -> list[dict]:
+    items: list[dict] = []
+    for fp in sorted(folder.glob("*.yml")):
+        d = read_yaml_file(fp)
+        d["_file"] = str(fp)
+        items.append(d)
     return items
 
-def ensure_unique_ids(items: list[dict], kind: str):
-    seen = {}
-    for it in items:
-        _id = it.get("id")
-        if not _id:
-            raise ValueError(f"Missing id in {it.get('_file')}")
-        if _id in seen:
-            raise ValueError(f"Duplicate {kind} id '{_id}' in {seen[_id]} and {it['_file']}")
-        seen[_id] = it["_file"]
 
-def main():
-    warbands = load_yaml_files(DATA / "warbands")
-    units = load_yaml_files(DATA / "units")
+def validate_schema(items: list[dict], schema: dict, kind: str) -> None:
+    v = Draft202012Validator(schema)
+    for it in items:
+        payload = {k: v for k, v in it.items() if not k.startswith("_")}
+        errors = sorted(v.iter_errors(payload), key=lambda e: list(e.path))
+        if errors:
+            msg = "\n".join([f"  - {list(e.path)}: {e.message}" for e in errors[:20]])
+            raise ValueError(f"{kind} schema errors in {it.get('_file')}:\n{msg}")
+
+
+def ensure_id_and_filename(items: list[dict], kind: str) -> None:
+    for it in items:
+        fp = Path(it["_file"])
+        _id = it.get("id")
+        if not isinstance(_id, str) or not _id.strip():
+            raise ValueError(f"{fp}: missing required 'id'")
+        if not ID_RE.fullmatch(_id):
+            raise ValueError(f"{fp}: invalid id '{_id}' (allowed: a-z 0-9 '-')")
+        if fp.stem != _id:
+            raise ValueError(f"{fp}: filename must match id '{_id}' (expected {fp.with_name(_id + fp.suffix)})")
+
+
+def ensure_unique_ids(items: list[dict], kind: str) -> None:
+    seen: set[str] = set()
+    for it in items:
+        _id = it["id"]
+        if _id in seen:
+            raise ValueError(f"Duplicate {kind} id: '{_id}'")
+        seen.add(_id)
+
+
+def ensure_refs(warbands: list[dict], units: list[dict]) -> None:
+    warband_ids = {w["id"] for w in warbands}
+    unit_ids = {u["id"] for u in units}
+
+    for w in warbands:
+        fp = w["_file"]
+        for uid in (w.get("unit_ids") or []):
+            if uid not in unit_ids:
+                raise ValueError(f"{fp}: unit_ids references unknown unit id '{uid}'")
+
+    for u in units:
+        fp = u["_file"]
+        for wid in (u.get("warband_ids") or []):
+            if wid not in warband_ids:
+                raise ValueError(f"{fp}: warband_ids references unknown warband id '{wid}'")
+
+
+def main() -> int:
+    warbands = load_dir(DATA / "warbands")
+    units = load_dir(DATA / "units")
+
+    warband_schema = read_json(SCHEMAS / "warband.schema.json")
+    unit_schema = read_json(SCHEMAS / "unit.schema.json")
+
+    validate_schema(warbands, warband_schema, "warband")
+    validate_schema(units, unit_schema, "unit")
+
+    ensure_id_and_filename(warbands, "warband")
+    ensure_id_and_filename(units, "unit")
 
     ensure_unique_ids(warbands, "warband")
     ensure_unique_ids(units, "unit")
 
-    unit_ids = {u["id"] for u in units}
-    warband_ids = {w["id"] for w in warbands}
-
-    for w in warbands:
-        inst = {k: v for k, v in w.items() if k != "_file"}
-        validate(instance=inst, schema=WAR_BAND_SCHEMA)
-        missing = [uid for uid in w["unit_ids"] if uid not in unit_ids]
-        if missing:
-            raise ValueError(f"{w['_file']} references missing unit_ids: {missing}")
-
-    for u in units:
-        inst = {k: v for k, v in u.items() if k != "_file"}
-        validate(instance=inst, schema=UNIT_SCHEMA)
-        missing = [wid for wid in u["warband_ids"] if wid not in warband_ids]
-        if missing:
-            raise ValueError(f"{u['_file']} references missing warband_ids: {missing}")
+    ensure_refs(warbands, units)
 
     print("OK: validation passed")
+    return 0
+
 
 if __name__ == "__main__":
-    main()
+    try:
+        raise SystemExit(main())
+    except Exception as e:
+        print(f"ERROR: {e}", file=sys.stderr)
+        raise SystemExit(1)
+EOF

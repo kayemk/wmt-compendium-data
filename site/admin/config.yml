@@ -19,8 +19,13 @@ collections:
     extension: "yml"
     format: "yml"
     slug: "{{id}}"
+    identifier_field: "name"
     fields:
-      - { label: "ID", name: "id", widget: "string" }
+      - label: "ID"
+        name: "id"
+        widget: "string"
+        pattern: ["^[a-z0-9-]+$", "Use lowercase letters, numbers and hyphens only (e.g. reikland-mercenaries)."]
+        hint: "Stable key. Don’t change after creation."
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Game", name: "game", widget: "string", default: "Warhammer More Time" }
       - label: "Source"
@@ -30,7 +35,16 @@ collections:
           - { label: "Name", name: "name", widget: "string" }
           - { label: "Page", name: "page", widget: "number", value_type: "int", required: false }
       - { label: "Summary", name: "summary", widget: "text", required: false }
-      - { label: "Unit IDs", name: "unit_ids", widget: "list" }
+
+      - label: "Units"
+        name: "unit_ids"
+        widget: "relation"
+        collection: "units"
+        search_fields: ["name", "id"]
+        value_field: "id"
+        display_fields: ["name", "id"]
+        multiple: true
+
       - { label: "Tags", name: "tags", widget: "list", required: false }
 
   - name: "units"
@@ -40,20 +54,36 @@ collections:
     extension: "yml"
     format: "yml"
     slug: "{{id}}"
+    identifier_field: "name"
     fields:
-      - { label: "ID", name: "id", widget: "string" }
+      - label: "ID"
+        name: "id"
+        widget: "string"
+        pattern: ["^[a-z0-9-]+$", "Use lowercase letters, numbers and hyphens only (e.g. swordsman)."]
+        hint: "Stable key. Don’t change after creation."
       - { label: "Name", name: "name", widget: "string" }
+
       - label: "Type"
         name: "type"
         widget: "select"
         options: ["hero", "henchman", "hired_sword", "other"]
-      - { label: "Warband IDs", name: "warband_ids", widget: "list" }
+
+      - label: "Warbands"
+        name: "warband_ids"
+        widget: "relation"
+        collection: "warbands"
+        search_fields: ["name", "id"]
+        value_field: "id"
+        display_fields: ["name", "id"]
+        multiple: true
+
       - label: "Cost"
         name: "cost"
         widget: "object"
         fields:
           - { label: "Gold", name: "gold", widget: "number", value_type: "int" }
           - { label: "Upkeep", name: "upkeep", widget: "number", value_type: "int", required: false }
+
       - label: "Profile"
         name: "profile"
         widget: "object"
@@ -68,6 +98,7 @@ collections:
           - { label: "A",  name: "A",  widget: "number", value_type: "int" }
           - { label: "Ld", name: "Ld", widget: "number", value_type: "int" }
           - { label: "Sv", name: "Sv", widget: "number", value_type: "int", required: false }
+
       - label: "Equipment"
         name: "equipment"
         widget: "object"
@@ -75,4 +106,5 @@ collections:
         fields:
           - { label: "Starting", name: "starting", widget: "list", required: false }
           - { label: "Options",  name: "options",  widget: "list", required: false }
+
       - { label: "Keywords", name: "keywords", widget: "list", required: false }
