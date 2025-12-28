@@ -1,22 +1,57 @@
 {
   "type": "object",
-  "required": ["id", "name", "game", "source", "unit_ids"],
+  "required": [
+    "id",
+    "name",
+    "game",
+    "source",
+    "unit_ids"
+  ],
   "properties": {
-    "id": { "type": "string", "pattern": "^[a-z0-9\\-]+$" },
-    "name": { "type": "string" },
-    "game": { "type": "string" },
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "name": {
+      "type": "string"
+    },
+    "game": {
+      "type": "string"
+    },
     "source": {
       "type": "object",
-      "required": ["name"],
+      "required": [
+        "name"
+      ],
       "properties": {
-        "name": { "type": "string" },
-        "page": { "type": ["integer", "null"] }
+        "name": {
+          "type": "string"
+        },
+        "page": {
+          "type": [
+            "integer",
+            "null"
+          ]
+        }
       },
       "additionalProperties": false
     },
-    "summary": { "type": "string" },
-    "unit_ids": { "type": "array", "items": { "type": "string" }, "minItems": 1 },
-    "tags": { "type": "array", "items": { "type": "string" } }
+    "summary": {
+      "type": "string"
+    },
+    "unit_ids": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
   },
   "additionalProperties": false
 }
