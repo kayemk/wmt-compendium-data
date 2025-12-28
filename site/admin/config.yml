@@ -25,7 +25,7 @@ collections:
         name: "id"
         widget: "string"
         pattern: ["^[a-z0-9-]+$", "Use lowercase letters, numbers and hyphens only (e.g. reikland-mercenaries)."]
-        hint: "Stable key. Don’t change after creation."
+        hint: "Stable key. Do NOT change after creation. Must match the filename (slug)."
       - { label: "Name", name: "name", widget: "string" }
       - { label: "Game", name: "game", widget: "string", default: "Warhammer More Time" }
       - label: "Source"
@@ -60,7 +60,7 @@ collections:
         name: "id"
         widget: "string"
         pattern: ["^[a-z0-9-]+$", "Use lowercase letters, numbers and hyphens only (e.g. swordsman)."]
-        hint: "Stable key. Don’t change after creation."
+        hint: "Stable key. Do NOT change after creation. Must match the filename (slug)."
       - { label: "Name", name: "name", widget: "string" }
 
       - label: "Type"
