@@ -1,4 +1,17 @@
+# macOS
 .DS_Store
+
+# Python / venv
 .venv/
 __pycache__/
+*.py[cod]
+*.pyo
+
+# Build output (dein Generator schreibt hier rein)
 dist/
+
+# Editor backups / temp files
+*~
+*.swp
+*.swo
+*.un~
