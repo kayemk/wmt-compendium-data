@@ -7,6 +7,9 @@ backend:
 
 publish_mode: editorial_workflow
 
+media_folder: "site/uploads"
+public_folder: "/uploads"
+
 collections:
   - name: "warbands"
     label: "Warbands"
@@ -50,3 +53,25 @@ collections:
         fields:
           - { label: "Gold", name: "gold", widget: "number", value_type: "int" }
           - { label: "Upkeep", name: "upkeep", widget: "number", value_type: "int", required: false }
+      - label: "Profile"
+        name: "profile"
+        widget: "object"
+        fields:
+          - { label: "M",  name: "M",  widget: "number", value_type: "int" }
+          - { label: "WS", name: "WS", widget: "number", value_type: "int" }
+          - { label: "BS", name: "BS", widget: "number", value_type: "int" }
+          - { label: "S",  name: "S",  widget: "number", value_type: "int" }
+          - { label: "T",  name: "T",  widget: "number", value_type: "int" }
+          - { label: "W",  name: "W",  widget: "number", value_type: "int" }
+          - { label: "I",  name: "I",  widget: "number", value_type: "int" }
+          - { label: "A",  name: "A",  widget: "number", value_type: "int" }
+          - { label: "Ld", name: "Ld", widget: "number", value_type: "int" }
+          - { label: "Sv", name: "Sv", widget: "number", value_type: "int", required: false }
+      - label: "Equipment"
+        name: "equipment"
+        widget: "object"
+        required: false
+        fields:
+          - { label: "Starting", name: "starting", widget: "list", required: false }
+          - { label: "Options",  name: "options",  widget: "list", required: false }
+      - { label: "Keywords", name: "keywords", widget: "list", required: false }
