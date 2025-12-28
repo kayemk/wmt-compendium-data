@@ -1,0 +1,40 @@
+name: Data request / correction
+description: Request a new Warband/Unit or report incorrect data.
+title: "[Data] "
+labels: ["data"]
+body:
+  - type: dropdown
+    id: kind
+    attributes:
+      label: What is this about?
+      options:
+        - New Warband
+        - New Unit
+        - Correction to existing Warband
+        - Correction to existing Unit
+    validations:
+      required: true
+
+  - type: input
+    id: name
+    attributes:
+      label: Name (as in the source)
+      placeholder: e.g. Reikland Mercenaries / Swordsman
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Source (book + page)
+      placeholder: e.g. Rulebook X, p. 12
+    validations:
+      required: true
+
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Describe what should be added/changed. Keep it short and factual.
+    validations:
+      required: true
