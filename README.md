@@ -1,10 +1,21 @@
 # WMT Compendium (Data)
 
-Community-maintained YAML data + schema validation + generated static JSON "API".
+Community-maintained data (YAML) for **Warhammer More Time** warbands and units.
+This repository builds a static JSON API and provides a simple Admin UI for contributions.
 
-- Viewer: GitHub Pages root
-- API: /api/index.json
-- Contribute: /admin/ (Decap CMS -> PRs via Open Authoring)
+## Links
+- **Admin (contribute here):** https://kayemk.github.io/wmt-compendium-data/admin/
+- **API index:** https://kayemk.github.io/wmt-compendium-data/api/index.json
 
-Fan-made project. Please don't upload PDFs or large verbatim rule text.
+## Contributing (Decap-only)
+Please contribute via the Admin UI (GitHub login). This creates a Pull Request for review.
 
+See: [CONTRIBUTING.md](CONTRIBUTING.md)
+
+## Data format
+- Warbands: `data/warbands/*.yml`
+- Units: `data/units/*.yml`
+
+## License
+Code & schema tooling: MIT  
+Data: CC BY 4.0 (recommended)
