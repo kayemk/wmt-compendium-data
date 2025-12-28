@@ -1,0 +1,19 @@
+id: test-unit-2
+name: test-unit-2
+type: henchman
+warband_ids:
+  - "12312"
+cost:
+  gold: 22
+  upkeep: 1
+profile:
+  A: 2
+  Sv: -1
+  I: 0
+  M: 2
+  BS: 2
+  S: -12
+  T: 2
+  W: 2
+  Ld: 2
+  WS: 2
