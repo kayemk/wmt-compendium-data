@@ -1,0 +1,18 @@
+id: skaven
+name: Skaven
+game: Warhammer More Time
+source:
+  name: Broheim (Skaven.pdf)
+summary: Fast, sneaky warband from Clan Eshin (Broheim/official PDF).
+tags:
+  - "race:Skaven"
+  - "source:broheim"
+  - official
+unit_ids:
+  - skaven-assassin-adept
+  - skaven-black-skaven
+  - skaven-eshin-sorcerer
+  - skaven-night-runners
+  - skaven-verminkin
+  - skaven-rat-ogre
+  - skaven-giant-rats

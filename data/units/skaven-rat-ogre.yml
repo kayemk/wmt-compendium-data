@@ -1,0 +1,20 @@
+id: skaven-rat-ogre
+name: Rat Ogre
+type: henchman
+warband_ids:
+  - skaven
+cost:
+  gold: 210
+profile:
+  M: 6
+  WS: 3
+  BS: 3
+  S: 5
+  T: 5
+  W: 3
+  I: 4
+  A: 3
+  Ld: 4
+equipment:
+  weapons_armour: Uses claws/teeth (per Skaven warband rules).
+  notes: "Limit: 0-1 per warband (per Skaven warband rules)."

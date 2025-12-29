@@ -1,0 +1,20 @@
+id: skaven-giant-rats
+name: Giant Rats
+type: henchman
+warband_ids:
+  - skaven
+cost:
+  gold: 15
+profile:
+  M: 6
+  WS: 2
+  BS: 0
+  S: 3
+  T: 3
+  W: 1
+  I: 4
+  A: 1
+  Ld: 4
+equipment:
+  weapons_armour: None (animal).
+  notes: Animals (per Skaven warband rules).

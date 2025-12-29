@@ -1,0 +1,17 @@
+id: dwarf-treasure-hunters
+name: Dwarf Treasure Hunters
+game: Warhammer More Time
+source:
+  name: Broheim (Dwarf Treasure Hunters.pdf)
+summary: Sturdy dwarfs searching for lost treasure (Broheim/official PDF).
+tags:
+  - "race:Dwarfs"
+  - "source:broheim"
+  - official
+unit_ids:
+  - dwarf-treasure-hunters-dwarf-noble
+  - dwarf-treasure-hunters-troll-slayers
+  - dwarf-treasure-hunters-dwarf-engineer
+  - dwarf-treasure-hunters-dwarf-clansmen
+  - dwarf-treasure-hunters-beardlings
+  - dwarf-treasure-hunters-dwarf-thunderers

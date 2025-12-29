@@ -1,0 +1,20 @@
+id: skaven-assassin-adept
+name: Assassin Adept
+type: hero
+warband_ids:
+  - skaven
+cost:
+  gold: 60
+profile:
+  M: 6
+  WS: 4
+  BS: 4
+  S: 4
+  T: 3
+  W: 1
+  I: 5
+  A: 1
+  Ld: 7
+equipment:
+  weapons_armour: May be equipped from the Skaven Equipment list (see Skaven PDF).
+  notes: Leader of the warband (per Skaven warband rules).

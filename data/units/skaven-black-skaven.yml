@@ -1,0 +1,19 @@
+id: skaven-black-skaven
+name: Black Skaven
+type: hero
+warband_ids:
+  - skaven
+cost:
+  gold: 40
+profile:
+  M: 6
+  WS: 4
+  BS: 3
+  S: 4
+  T: 3
+  W: 1
+  I: 5
+  A: 1
+  Ld: 6
+equipment:
+  weapons_armour: May be equipped from the Skaven Equipment list (see Skaven PDF).
