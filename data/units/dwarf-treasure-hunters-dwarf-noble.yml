@@ -1,0 +1,20 @@
+id: dwarf-treasure-hunters-dwarf-noble
+name: Dwarf Noble
+type: hero
+warband_ids:
+  - dwarf-treasure-hunters
+cost:
+  gold: 85
+profile:
+  M: 3
+  WS: 5
+  BS: 4
+  S: 3
+  T: 4
+  W: 1
+  I: 2
+  A: 1
+  Ld: 9
+equipment:
+  weapons_armour: May be equipped from the Dwarf Equipment list (see Dwarf Treasure Hunters PDF).
+  notes: Leader of the warband (per warband rules).

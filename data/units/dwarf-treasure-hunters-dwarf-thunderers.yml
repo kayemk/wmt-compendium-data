@@ -1,0 +1,20 @@
+id: dwarf-treasure-hunters-dwarf-thunderers
+name: Dwarf Thunderers
+type: henchman
+warband_ids:
+  - dwarf-treasure-hunters
+cost:
+  gold: 40
+profile:
+  M: 3
+  WS: 4
+  BS: 3
+  S: 3
+  T: 4
+  W: 1
+  I: 2
+  A: 1
+  Ld: 9
+equipment:
+  weapons_armour: May be equipped from the Dwarf Equipment list (see PDF).
+  notes: Ranged-focused (Thunderers) per warband rules.
